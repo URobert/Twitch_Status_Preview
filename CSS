@@ -1,0 +1,75 @@
+h2 {
+	font-family: 'Lobster', Georgia, Times, serif;
+	font-size: 40px;
+	line-height: 100px;
+  color: black;
+}
+
+.fancyFont{
+  font-family: 'Lobster', Georgia, Times, serif;
+	font-size: 20px;
+	line-height: 2px;
+  margin-top:10px;
+  color: black;
+  padding: 1px;
+}
+
+body {
+  background: url(https://i.embed.ly/1/display/resize?key=1e6a1a1efdb011df84894040444cdc60&url=http%3A%2F%2Ffc00.deviantart.net%2Ffs71%2Fi%2F2012%2F055%2F4%2Fb%2Fjust_plain_abstract_by_valenc-d4qsxwe.jpg);
+}
+
+.mybuttons {
+  padding-bottom:5px;
+}
+
+form {
+ width:500px;
+ margin:50px auto;
+}
+
+.sBtn {
+ font-family: 'Lobster', Georgia, Times, serif;
+ position:relative;
+ padding:4.5px 15px;
+ left:-29px;
+ border:2px solid #207cca;
+ background-color:#207cca;
+ color:#fafafa;
+}
+.sBtn:hover  {
+ background-color:#fafafa;
+ color:#207cca;
+}
+
+.btn-sm {
+  background: gray;
+}
+
+.strDesc {
+color: white;
+background: transparent;
+padding: 4.5px;
+margin-left: 4px;
+}
+
+.thumbnail{
+  border-color: black;
+  background-color: black;
+}
+
+#addNewStreamB{
+     /*position:relative;
+     top:0;
+     right:0;*/
+     margin-right: 6px;
+     border-radius: 4em;
+     font-size: 20px;
+     padding: 10px 20px 5px 20px;
+     color: black;
+}
+
+.wrappBtn{
+text-align:right;
+}
+
+
