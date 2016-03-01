@@ -1,0 +1,118 @@
+"use strict";
+
+$(document).ready(function () {
+ var btnNr = 1, response = 1;
+ var users = ["medrybw","freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb","thomasballinger","esl_sc2","brunofin"];
+ var description, previewUrl, streamLink;
+  
+$(document).bind('keypress',pressed);
+  
+ for (let i=0; i < users.length; i++) {
+  
+ $.getJSON("https://api.twitch.tv/kraken/streams/"+users[i]+ "?callback=?", function(json) {
+  
+//console.log(json.error);
+   if (json.error === "Unprocessable Entity"){
+     previewUrl = "https://i.ytimg.com/vi/1rXXM9dG5TA/mqdefault.jpg";
+     $("#"+users[i]+"Desc").html(users[i].toUpperCase());
+     $("#"+users[i]).attr("disabled", true);
+     $("#"+users[i]).text("CLOSED");
+     $("#"+users[i]).css("background-color","orange");
+     $("#"+users[i]+"Link").attr("href", "javascript:;");
+     $("#"+users[i]+"Img").attr("src", previewUrl);
+
+   }else{
+   
+  if (json.stream == null){
+    previewUrl = "http://www.halolfg.com/img/stream_offline.jpg";
+     $("#"+users[i]+"Desc").html(users[i].toUpperCase());
+     $("#"+users[i]).attr("disabled", true);
+     $("#"+users[i]).text("OFFLINE");
+     $("#"+users[i]).css("background-color","red");
+     $("#"+users[i]+"Link").attr("href", "javascript:;");
+     $("#"+users[i]+"Img").attr("src", previewUrl);
+     $("#window"+i).addClass("isOffline");
+    //console.log(i);
+  }else{
+    streamLink = json.stream.channel.url;
+    description = json.stream.channel.status;
+    previewUrl = json.stream.preview.medium;
+     $("#"+users[i]+"Desc").html(description.substr(0,17).toUpperCase()+"...");
+     $("#"+users[i]+"Link").attr("href", streamLink);
+     $("#"+users[i]+"Img").attr("src", previewUrl);
+     $("#"+users[i]).attr("disabled", true);
+     $("#"+users[i]).text("ONLINE");
+     $("#"+users[i]).css("background-color","green");
+     $("#window"+i).addClass("yepOnline");
+   }  
+  } // end of error/closed down stream else    
+ });
+}  // end of for 
+
+$("#addNewStreamB").click(addStream);  
+$("#searchB").click(streamSearch);
+$("#onlineB").click(streamsOnline);
+$("#offlineB").click(streamsOffline);
+$("#allB").click(allStreams); 
+  
+function streamSearch(){              //basic search 
+  $(".streamWindows").hide();
+  var s = document.getElementById("searchInput").value.toLowerCase();
+  for (var j=0;  j<users.length; j++){
+    if (users[j] === s){
+      console.log("found");
+      $("#window"+users.indexOf(users[j])).fadeIn();
+      break;
+    }else{
+      continue;
+    }
+  }
+}  
+
+function pressed(e)                 //listener for enter for search
+{
+    if(e.keyCode === 13)
+    {   event.preventDefault();
+       $(".streamWindows").hide();
+        var s = document.getElementById("searchInput").value.toLowerCase();
+        for (var j=0;  j<users.length; j++){
+          if (users[j] === s){
+      console.log("found");
+      $("#window"+users.indexOf(users[j])).fadeIn();
+      break;
+    }else{
+      continue;
+    }
+  }
+    }
+}
+  
+function addStream(){
+  alert("Coming soon !");
+}  
+ 
+  
+}); // end of ready
+
+                      // Making Windows Vanish
+function streamsOnline (){
+  console.log("Streams Online");
+  $(".streamWindows").hide();
+  $(".yepOnline").fadeIn();
+}
+
+function streamsOffline (){
+  console.log("Streams Offline");
+  $(".streamWindows").hide();
+  $(".isOffline").fadeIn();
+}
+
+function allStreams (){
+  console.log("All streams listed");
+  $(".streamWindows").fadeIn();
+}
+
+
+
+
+
